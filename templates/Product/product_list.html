@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block nav_home %} active {% endblock nav_home %}
+{% block content %}
+    <link rel="stylesheet" href="../../static/css/footer.css">
+    <style>
+        img {
+            float: left;
+            width: 100px;
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
+
+
+    <div class="container">
+        <div class="row">
+            {% for object in object_list %}
+                <div class="col-lg-3 col-md-4 col-sm-6 text-center d-flex">
+                    <div class="card" style="width: 18rem; margin-top:10px">
+                        {% if object.image %}
+                            <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.name }}" width="350px"
+                                 min-height="350px">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.name | truncatewords:5 }}</h5>
+                            <p class="card-text">{{ object.category | default:"-" }}</p>
+                            <p class="card-text">{{ object.description | truncatewords:10 }}</p>
+                            <a href="{% url 'Product_product_detail' object.slug %}" class="btn btn-primary">Order
+                                Now</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+{% endblock %}
